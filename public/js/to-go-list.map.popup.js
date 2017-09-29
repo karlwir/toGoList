@@ -1,12 +1,11 @@
 toGoList.map.popup = {
   viewModel: function viewModel(params) {
+    const toGo = params;
     this.remove = function remove() {
-      toGoList.viewModel.removeToGo(this.toGo);
+      toGoList.viewModel.removeToGo(toGo);
     };
-
-    this.toGo = params;
-    this.name = params.name;
-    this.description = params.description;
+    this.name = toGo.name;
+    this.description = toGo.description;
   },
 
   template: { element: 'map-popup' },

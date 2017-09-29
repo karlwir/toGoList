@@ -10,7 +10,6 @@ toGoList.map.popupCreate = {
       toGoList.viewModel.saveToGo(toGo);
       params.popup.remove();
     };
-
     this.lng = params.lng;
     this.lat = params.lat;
     this.close = params.close;

@@ -25,7 +25,7 @@ toGoList.viewModel = {
       const map = toGoList.viewModel.map;
       newValue.forEach((toGo) => {
         if (!toGo.marker) {
-          toGoList.map.addToGoMarker(toGo, map);
+          toGoList.map.addToGoToMap(toGo, map);
         }
       });
     });

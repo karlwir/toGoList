@@ -1,36 +1,35 @@
 toGoList.map = {
   showPopupCreate: (map, e) => {
-    map.panTo(e.lngLat);
-    const popup = new mapboxgl.Popup()
-      .setLngLat(e.lngLat);
+    const popupContent = window.document.createElement('div');
 
-    this.content = window.document.createElement('div');
-    this.params = {
+    const popup = new mapboxgl.Popup()
+      .setLngLat(e.lngLat)
+      .addTo(map)
+      .setDOMContent(popupContent);
+
+    const params = {
       lng: e.lngLat.lng,
       lat: e.lngLat.lat,
       popup,
     };
-    this.content.setAttribute('data-bind', 'component: { name: "map-popup-create", params: params }');
-    ko.applyBindingsToNode(this.content);
 
-    popup.setDOMContent(this.content)
-      .addTo(map);
+    ko.applyBindingsToNode(popupContent, { component: { name: 'map-popup-create', params } });
   },
 
-  addToGoMarker: (toGo, map) => {
-    this.content = window.document.createElement('div');
-    this.params = toGo;
-    this.content.setAttribute('data-bind', 'component: { name: "map-popup", params: params }');
-    ko.applyBindingsToNode(this.content);
-    this.popup = new mapboxgl.Popup()
-      .setDOMContent(this.content);
+  addToGoToMap: (toGo, map) => {
+    const popupContent = window.document.createElement('div');
+
+    const popup = new mapboxgl.Popup()
+      .setDOMContent(popupContent);
 
     const marker = new mapboxgl.Marker()
       .setLngLat([toGo.lng, toGo.lat])
-      .setPopup(this.popup)
+      .setPopup(popup)
       .addTo(map);
 
     toGo.marker = marker;
+
+    ko.applyBindingsToNode(popupContent, { component: { name: 'map-popup', params: toGo } });
   },
 
   initMap: () => {
