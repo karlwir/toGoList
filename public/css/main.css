@@ -1,0 +1,41 @@
+html,
+body {
+  height: 100%;
+  min-height: 100%;
+}
+
+header {
+  padding: 1rem;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  font-weight: 200;
+  margin: 0;
+}
+
+header h1 span.highlighted {
+  color: #00ea81;
+  font-weight: 600;
+}
+
+textarea {
+  resize: none;
+}
+
+div.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+}
+
+div#map {
+  flex: 1
+}
+
+.mapboxgl-marker {
+  height: 35px;
+  width: 35px;
+  background-image: url('../img/star.svg');
+}

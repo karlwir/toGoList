@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>To Go List!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>To<span class="highlighted">Go</span>List</h1>
+      </header>
+      <div id='map'></div>
+    </div>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
+    <script src='/js/lib/knockout-min.js'></script>
+    <script src="/js/to-go-list.js"></script>
+    <script src="/js/to-go-list.map.js"></script>
+    <script src="/js/to-go-list.map.popup.js"></script>
+    <script src="/js/to-go-list.map.popupCreate.js"></script>
+    <script src="/js/to-go-list.gui.js"></script>
+    <script src="/js/to-go-list.view-model.js"></script>
+    <script src="/js/to-go-list.repository.js"></script>
+    <script src="/js/to-go-list.main.js"></script>
+
+    <template id="map-popup-create">
+        <strong>Save spot here</strong>
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" class="form-control form-control-sm" data-bind="value: name">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea class="form-control form-control-sm" rows="3" resize data-bind="value: description"></textarea>
+        </div>
+        <input type="hidden" data-bind="value: lng">
+        <input type="hidden" data-bind="value: lat">
+        <button class="btn btn-primary btn-sm" data-bind="click: save, enable: validToGo()">Save</button>
+    </template>
+
+    <template id="map-popup">
+        <strong data-bind="text: name"></strong>
+        <p data-bind="text: description"></p>
+        <button class="btn btn-danger btn-sm" data-bind="click: remove">Remove</button>
+    </template>
+  </body>
+</html>
