@@ -45,19 +45,25 @@ toGoList.map = {
     ko.applyBindingsToNode(popupContent, { component: { name: 'map-popup', params } });
   },
 
-  boundsFromMarkers: () => {
+  centerMarkers: () => {
     const bounds = new mapboxgl.LngLatBounds();
+    const toGos = this.viewModel.filteredToGos();
 
-    this.viewModel.filteredToGos().forEach((toGo) => {
+    toGos.forEach((toGo) => {
       const lnglat = new mapboxgl.LngLat(toGo.lng, toGo.lat);
       bounds.extend(lnglat);
     });
 
-    if (this.viewModel.filteredToGos().length > 0) {
+    if (toGos.length > 0) {
       this.viewModel.map.fitBounds(bounds, {
         padding: { top: 25, bottom: 25, left: 25, right: 25 },
         maxZoom: 12 },
       );
+    }
+    if (toGos.length === 1) {
+      if (!toGos[0].marker.getPopup().isOpen()) {
+        toGos[0].marker.togglePopup();
+      }
     }
   },
 

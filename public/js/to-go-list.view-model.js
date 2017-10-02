@@ -57,7 +57,7 @@ toGoList.ViewModel = function ViewModel() {
           }
         });
       }
-      toGoList.map.boundsFromMarkers();
+      toGoList.map.centerMarkers();
     });
   };
 };
