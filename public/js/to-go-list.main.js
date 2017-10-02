@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const viewModel = toGoList.viewModel;
+  const viewModel = new toGoList.ViewModel();
   viewModel.registerComponents();
+  viewModel.map = toGoList.map.initMap(viewModel);
   viewModel.setupSubscribers();
-  viewModel.map = toGoList.map.initMap();
-  ko.applyBindings(toGoList.viewModel);
-  toGoList.repository.load();
+  ko.applyBindings(viewModel);
+  toGoList.repository.load(viewModel);
 });

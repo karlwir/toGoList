@@ -1,5 +1,6 @@
 toGoList.map.popupCreate = {
   viewModel: function viewModel(params) {
+    const rootViewModel = params.viewModel;
     this.save = function save() {
       const toGo = {
         name: this.name(),
@@ -7,7 +8,7 @@ toGoList.map.popupCreate = {
         lng: this.lng,
         lat: this.lat,
       };
-      toGoList.viewModel.saveToGo(toGo);
+      rootViewModel.saveToGo(toGo);
       params.popup.remove();
     };
     this.lng = params.lng;

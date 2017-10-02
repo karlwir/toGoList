@@ -1,4 +1,6 @@
 toGoList.map = {
+  viewModel: {},
+
   showPopupCreate: (map, e) => {
     const popupContent = window.document.createElement('div');
 
@@ -11,6 +13,7 @@ toGoList.map = {
       lng: e.lngLat.lng,
       lat: e.lngLat.lat,
       popup,
+      viewModel: this.viewModel,
     };
 
     ko.applyBindingsToNode(popupContent, { component: { name: 'map-popup-create', params } });
@@ -22,17 +25,43 @@ toGoList.map = {
     const popup = new mapboxgl.Popup()
       .setDOMContent(popupContent);
 
-    const marker = new mapboxgl.Marker()
+    const markerContent = window.document.createElement('div');
+    const markerContentText = window.document.createElement('span');
+    markerContentText.innerText = toGo.name;
+    markerContent.appendChild(markerContentText);
+
+    const marker = new mapboxgl.Marker(markerContent)
       .setLngLat([toGo.lng, toGo.lat])
       .setPopup(popup)
       .addTo(map);
 
     toGo.marker = marker;
 
-    ko.applyBindingsToNode(popupContent, { component: { name: 'map-popup', params: toGo } });
+    const params = {
+      toGo,
+      viewModel: this.viewModel,
+    };
+
+    ko.applyBindingsToNode(popupContent, { component: { name: 'map-popup', params } });
   },
 
-  initMap: () => {
+  boundsFromMarkers: () => {
+    const bounds = new mapboxgl.LngLatBounds();
+
+    this.viewModel.filteredToGos().forEach((toGo) => {
+      const lnglat = new mapboxgl.LngLat(toGo.lng, toGo.lat);
+      bounds.extend(lnglat);
+    });
+
+    if (this.viewModel.filteredToGos().length > 0) {
+      this.viewModel.map.fitBounds(bounds, {
+        padding: { top: 25, bottom: 25, left: 25, right: 25 },
+        maxZoom: 12 },
+      );
+    }
+  },
+
+  initMap: (viewModel) => {
     mapboxgl.accessToken = 'pk.eyJ1Ijoia2FybHdpciIsImEiOiJjajgxbXo0OWI3OHpvMnltbDU0a2VzdmNkIn0.vuE9EOmGnr5xL2HbeX8__w';
     const map = new mapboxgl.Map({
       container: 'map',
@@ -47,6 +76,8 @@ toGoList.map = {
         toGoList.map.showPopupCreate(map, e);
       }
     });
+
+    this.viewModel = viewModel;
 
     return map;
   },

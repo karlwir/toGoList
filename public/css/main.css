@@ -38,4 +38,20 @@ div#map {
   height: 35px;
   width: 35px;
   background-image: url('../img/star.svg');
+  cursor: pointer;
+}
+
+.mapboxgl-marker span {
+  font-weight: 600;
+  margin-left: 20px;
+  line-height: 40px;
+  max-width: 40px;
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.mapboxgl-marker:hover span {
+max-width: none;
 }

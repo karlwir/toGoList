@@ -1,8 +1,9 @@
 toGoList.map.popup = {
   viewModel: function viewModel(params) {
-    const toGo = params;
+    const toGo = params.toGo;
+    const rootViewModel = params.viewModel;
     this.remove = function remove() {
-      toGoList.viewModel.removeToGo(toGo);
+      rootViewModel.removeToGo(toGo);
     };
     this.name = toGo.name;
     this.description = toGo.description;

@@ -11,6 +11,9 @@
     <div class="wrapper">
       <header>
         <h1>To<span class="highlighted">Go</span>List</h1>
+        <input type="text" class="form-control form-control-sm" data-bind="value: filterQuery">
+        <span class="badge badge-default badge-warning" style="display: none;" data-bind="visible: filterActive">Search filter active</span>
+        <span class="badge badge-default badge-danger" style="display: none;" data-bind="visible: noFilterResult">No filter result</span>
       </header>
       <div id='map'></div>
     </div>

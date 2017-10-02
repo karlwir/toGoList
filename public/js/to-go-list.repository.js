@@ -1,13 +1,13 @@
 toGoList.repository = {
-  load: () => {
+  load: (viewModel) => {
     const toGos = (localStorage.getItem('toGoList')) ?
       JSON.parse(localStorage.getItem('toGoList')) : [];
 
-    toGoList.viewModel.toGos(toGos);
+    viewModel.toGos(toGos);
   },
 
-  save: () => {
-    const toGos = toGoList.viewModel.toGos();
+  save: (viewModel) => {
+    const toGos = viewModel.toGos();
     const toGosNoMarkers = toGos.map((toGo) => {
       const toGoCopy = Object.assign({}, toGo);
       toGoCopy.marker = undefined;
