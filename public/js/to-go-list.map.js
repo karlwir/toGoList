@@ -45,6 +45,14 @@ toGoList.map = {
     ko.applyBindingsToNode(popupContent, { component: { name: 'map-popup', params } });
   },
 
+  centerToGo: (toGo) => {
+    const lnglat = new mapboxgl.LngLat(toGo.lng, toGo.lat);
+    this.viewModel.map.panTo(lnglat);
+    if (!toGo.marker.getPopup().isOpen()) {
+      toGo.marker.togglePopup();
+    }
+  },
+
   centerMarkers: () => {
     const bounds = new mapboxgl.LngLatBounds();
     const toGos = this.viewModel.filteredToGos();

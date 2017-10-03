@@ -30,8 +30,28 @@ div.wrapper {
 
 }
 
+div.map-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+div.list {
+  width: 280px;
+}
+
 div#map {
-  flex: 1
+  flex: 1;
+}
+
+ul.togo-list li {
+  border-bottom: 1px solid #f4f4f4;
+  cursor: pointer;
+  padding: .5rem 0;
+}
+
+ul.togo-list li:hover {
+  background-color: #f4f4f4;
 }
 
 .mapboxgl-marker {
@@ -42,7 +62,7 @@ div#map {
 }
 
 .mapboxgl-marker span {
-  font-weight: 600;
+  font-weight: 500;
   margin-left: 20px;
   line-height: 40px;
   max-width: 40px;
